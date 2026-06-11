@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="95px" height="95px" viewBox="0 0 95 95" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>进行中-hover</title>
+    <defs>
+        <rect id="path-1" x="14.4974747" y="14.4974747" width="70" height="70" rx="8"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="70" height="70" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-dasharray="4,4">
+        <g id="简单节点的三种状态" transform="translate(-1482.000000, -1419.000000)" fill="#F6F7F9" stroke="#1791FF" stroke-width="1.2">
+            <g id="编组-11" transform="translate(1480.003788, 1417.000000)">
+                <use id="矩形备份-22" mask="url(#mask-2)" transform="translate(49.497475, 49.497475) rotate(-315.000000) translate(-49.497475, -49.497475) " xlink:href="#path-1"></use>
+            </g>
+        </g>
+    </g>
+</svg>

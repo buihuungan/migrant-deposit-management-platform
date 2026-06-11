@@ -1,0 +1,7 @@
+from 172.168.1.10:30006/common/openjdk8:latest
+workdir /
+copy ./deploy/config /config
+copy ./target/Eureka-Server1-0.0.1-SNAPSHOT-exec.jar /Eureka-Server1-0.0.1-SNAPSHOT-exec.jar
+copy ./startup.sh /startup.sh
+run chmod 755 /startup.sh
+entrypoint ["/startup.sh"]

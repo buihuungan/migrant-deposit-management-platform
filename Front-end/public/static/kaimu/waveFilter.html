@@ -1,0 +1,95 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h2>滤波器模型</h2>
+  <input  type="button" value="展示" onclick="onClick1()">
+  <object id="KM3DStreamCtrl" name="KM3DStreamCtrl" classid="clsid:27BDE92D-159F-448B-9DBB-F589C8D19B0A" width="800" height="600" codebase="KM3DStreamCtrl.ocx">
+  </object>
+</body>
+<script type="text/javascript">
+	var but5 = 1.0
+	function onClick1()
+	{
+    console.log('ttttttttttttttttttt')
+		// KM3DStreamCtrl.SmoothTransitionMode = false;
+		KM3DStreamCtrl.fileName = "F:\\仿真文档\\开目模型\\武科大与开目仿真平台的集成方法说明\\kmapx文件\\files\\ebom.xml";
+		//KM3DStreamCtrl.ReflectKeybordEvent1 = 1;	
+		//KM3DStreamCtrl.ShowPreSelTooltip = 1;
+	}
+  </script>
+</html> -->
+<html>
+<head>
+    <meta name="GENERATOR" content="Microsoft Visual Studio 8.0">
+	<meta http-equiv="Content-Type"content="text/html;charset=utf-8"/>
+    <title>Km3DSteamControl     </title>
+</head>
+<body>
+	<input type="file" name="mxh" id="mxh" size="80">   
+	<input type="button" value="打开模型" onclick="onClick1()">
+	<!-- <input type="button" value="显示tooltip" onclick="onClick6()">
+	<input type="button" value="高亮1" onclick="onClick2()">
+	<input type="button" value="高亮2" onclick="onClick3()">
+	<input type="button" value="透明度" onclick="onClick5()"> -->
+	<br/>
+    <object id="KM3DStreamCtrl" name="KM3DStreamCtrl" classid="clsid:27BDE92D-159F-448B-9DBB-F589C8D19B0A" width="700"
+        height="500" codebase="KM3DStreamCtrl.ocx">
+    </object>
+    <BR/>
+</body>
+
+<script type="text/javascript" for="KM3DStreamCtrl" event=OnPreSelect(lID)"">
+		// 此处根据参数ID 开始业务。最后返回retValue
+		var retValue = "      ϢTEST";
+		return retValue;
+</script>
+
+
+<script type="text/javascript">
+	var but5 = 1.0
+	function onClick1()
+	{
+		KM3DStreamCtrl.SmoothTransitionMode = false;
+		KM3DStreamCtrl.fileName = mxh.value;
+		//KM3DStreamCtrl.ReflectKeybordEvent1 = 1;	
+		//KM3DStreamCtrl.ShowPreSelTooltip = 1;
+	}
+	
+	function onClick6()
+	{
+	   KM3DStreamCtrl.ShowPreSelTooltip = 1;
+	  // KM3DStreamCtrl.HiliteSelect("200000035", 255, 1);
+	}
+	
+	function onClick2()
+	{
+		KM3DStreamCtrl.HiliteSelect("200000035", 255, 1);
+	}
+	
+	function onClick3()
+	{
+		KM3DStreamCtrl.HiliteSelect("200000003", 255, 1);
+	}
+	
+	function onClick4()
+	{
+		KM3DStreamCtrl.UnHiliteAll();
+	}
+	
+	function onClick5()
+	{
+	    but5 = but5 - 0.1;
+		KM3DStreamCtrl.SelectionTransparency=but5;
+	}	
+	//function onClick8()
+	//{
+		//but6 = KM3DStreamCtrl.GetDisplayPMI();
+		//alert but6;
+	//}	
+</script>

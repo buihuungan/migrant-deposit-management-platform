@@ -1,0 +1,16 @@
+<mxEditor>
+	<!-- <include name="/static/examples/editors/config/wfeditor-commons.xml"/> -->
+	<ui>
+		<add as="graph" element="menu_graph"
+			style="left:10px;right:0;top:0px;bottom:0;"/>
+		<add as="status" element="status"
+			style="height:20px;bottom:20px;left:20px;right:20px"/>
+		<!-- <add as="toolbar" x="230" y="220" width="100" style="padding:5px;padding-top:8px;padding-right:0px;"/> -->
+	</ui>
+	<mxGraph as="graph">
+		<include name="/static/examples/editors/config/wfgraph-commons.xml"/>
+	</mxGraph>
+	<!-- <mxDefaultToolbar as="toolbar">
+		<include name="/static/examples/editors/config/wftoolbar-commons.xml"/>
+	</mxDefaultToolbar> -->
+</mxEditor>

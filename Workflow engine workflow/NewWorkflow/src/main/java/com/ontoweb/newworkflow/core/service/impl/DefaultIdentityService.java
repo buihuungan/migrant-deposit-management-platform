@@ -1,0 +1,116 @@
+package com.ontoweb.newworkflow.core.service.impl;
+
+import com.ontoweb.newworkflow.core.process.assign.Entity;
+import com.ontoweb.newworkflow.core.process.assign.PageQuery;
+import com.ontoweb.newworkflow.core.service.IdentityService;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+/**
+ * @author ：Ethan yan
+ * @date ：Created in 2021/8/2 上午10:08
+ * @description：
+ * @modified By：
+ * @version: $
+ */
+@Service
+public class DefaultIdentityService implements IdentityService {
+
+    @Override
+    public Collection<String> getUsersByGroup(String group) {
+        List<String> users=new ArrayList<String>();
+        for(int i=1;i<5;i++){
+            users.add("user-"+group+"-"+i);
+        }
+        return users;
+    }
+
+    @Override
+    public Collection<String> getUsersByPosition(String position) {
+        List<String> users=new ArrayList<String>();
+        for(int i=1;i<5;i++){
+            users.add("user-"+position+"-"+i);
+        }
+        return users;
+    }
+
+    @Override
+    public Collection<String> getUsersByDept(String dept) {
+        List<String> users=new ArrayList<String>();
+        for(int i=1;i<5;i++){
+            users.add("user-"+dept+"-"+i);
+        }
+        return users;
+    }
+
+    @Override
+    public Collection<String> getUsersByDeptAndPosition(String dept, String position) {
+        List<String> users=new ArrayList<String>();
+        for(int i=1;i<5;i++){
+            users.add("user-"+dept+"-"+position+"-"+i);
+        }
+        return users;
+    }
+
+    public void userPageQuery(PageQuery<Entity> page) {
+        page.setRecordCount(400);
+        int index=page.getPageIndex();
+        int size=page.getPageSize();
+        List<Entity> entitys=new ArrayList<Entity>();
+        Entity parameter=page.getQueryParameter();
+        String id=null;
+        if(parameter!=null){
+            id=parameter.getId();
+        }
+        for(int i=(index-1)*size;i<(index*size);i++){
+            if(id!=null){
+                if(!String.valueOf(i).equals(id)){
+                    continue;
+                }
+            }
+            Entity entity=new Entity("user"+i,"测试用户"+i);
+            entitys.add(entity);
+        }
+        page.setResult(entitys);
+    }
+
+    public void deptPageQuery(PageQuery<Entity> page,String parentId) {
+        parentId=(parentId==null?"":parentId);
+        page.setRecordCount(400);
+        int index=page.getPageIndex();
+        int size=10;
+        List<Entity> entitys=new ArrayList<Entity>();
+        Entity parameter=page.getQueryParameter();
+        String id=null;
+        if(parameter!=null){
+            id=parameter.getId();
+        }
+        for(int i=(index-1)*size;i<(index*size);i++){
+            if(id!=null){
+                if(!String.valueOf(i).equals(id)){
+                    continue;
+                }
+            }
+            Entity entity=new Entity("dept"+parentId+i,"测试部门"+i);
+            if(i>4){
+                entity.setChosen(false);
+            }
+            entitys.add(entity);
+
+        }
+        page.setResult(entitys);
+    }
+
+    @Override
+    public void positionPageQuery(PageQuery<Entity> query, String parentId) {
+
+    }
+
+    @Override
+    public void groupPageQuery(PageQuery<Entity> query, String parentId) {
+
+    }
+}

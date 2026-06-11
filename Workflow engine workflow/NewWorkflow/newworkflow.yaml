@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: courseware-engine
+  namespace: $PROJECT_NAMESPACE
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  selector:
+    matchLabels:
+      app: courseware-engine
+      component: courseware-engine
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: courseware-engine
+        component: courseware-engine
+        tier: backend
+    spec:
+      containers:
+      - image: $REGISTRY/$HARBOR_NAMESPACE/$APP_NAME:$BUILD_NUMBER
+        imagePullPolicy: Always
+        name: courseware-engine
+        ports:
+        - containerPort: 37192
+          protocol: TCP
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      imagePullSecrets:
+         - name: $HARBOR_SECRET
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30

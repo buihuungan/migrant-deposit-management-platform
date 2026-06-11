@@ -1,0 +1,185 @@
+{
+    "name": "流程",
+    "start_process_url": "",
+    "category_id": "",
+    "effect_date": "",
+    "description": "",
+    "type": "process",
+    "nodeList": [
+        {
+            "id": "xnmqnrnwjf",
+            "type": "start",
+            "name": "开始",
+            "left": "51px",
+            "top": "34px",
+            "state": "waiting",
+            "feature": {},
+            "formDesignerId": "",
+            "onlineTableId": "",
+            "onlineDataId": "",
+            "label": "",
+            "event_handler_bean": "",
+            "hander_bean": ""
+        },
+        {
+            "id": "dw09mb3b6",
+            "type": "task",
+            "name": "人工节点1",
+            "left": "51px",
+            "top": "135px",
+            "state": "waiting",
+            "feature": {},
+            "formDesignerId": "",
+            "onlineTableId": "",
+            "onlineDataId": "",
+            "task_type": "Normal",
+            "event_handler_bean": "",
+            "assignment_type": "",
+            "assignee": [],
+            "due": {
+                "day": "",
+                "hour": "",
+                "minute": ""
+            },
+            "user_data": {
+                "key": "",
+                "value": ""
+            }
+        },
+        {
+            "id": "2tuzgsc4",
+            "type": "decision",
+            "name": "路由决策",
+            "left": "292px",
+            "top": "136px",
+            "state": "waiting",
+            "feature": {},
+            "formDesignerId": "",
+            "onlineTableId": "",
+            "onlineDataId": "",
+            "decision_type":"Expression",
+            "event_handler_bean": "",
+            "expression":"${daycount>10?\"test1\":\"test2\"}",
+        },
+        {
+            "id": "sue9uw51f7",
+            "type": "task",
+            "name": "人工节点2",
+            "left": "536px",
+            "top": "83px",
+            "state": "waiting",
+            "feature": {},
+            "formDesignerId": "",
+            "onlineTableId": "",
+            "onlineDataId": "",
+            "task_type": "Normal",
+            "event_handler_bean": "",
+            "assignment_type": "",
+            "assignee": [],
+            "due": {
+                "day": "",
+                "hour": "",
+                "minute": ""
+            },
+            "user_data": {
+                "key": "",
+                "value": ""
+            }
+        },
+        {
+            "id": "ogi1a7uatg",
+            "type": "task",
+            "name": "人工节点3",
+            "left": "533px",
+            "top": "184px",
+            "state": "waiting",
+            "feature": {},
+            "formDesignerId": "",
+            "onlineTableId": "",
+            "onlineDataId": "",
+            "task_type": "Normal",
+            "event_handler_bean": "",
+            "assignment_type": "",
+            "assignee": [],
+            "due": {
+                "day": "",
+                "hour": "",
+                "minute": ""
+            },
+            "user_data": {
+                "key": "",
+                "value": ""
+            }
+        },
+        {
+            "id": "rw5ajv1059",
+            "type": "task",
+            "name": "人工节点4",
+            "left": "723px",
+            "top": "134px",
+            "state": "waiting",
+            "feature": {},
+            "formDesignerId": "",
+            "onlineTableId": "",
+            "onlineDataId": "",
+            "task_type": "Normal",
+            "event_handler_bean": "",
+            "assignment_type": "",
+            "assignee": [],
+            "due": {
+                "day": "",
+                "hour": "",
+                "minute": ""
+            },
+            "user_data": {
+                "key": "",
+                "value": ""
+            }
+        },
+        {
+            "id": "ggbsjauss",
+            "type": "end",
+            "name": "结束",
+            "terminate": "true",
+            "left": "722px",
+            "top": "261px",
+            "state": "waiting",
+            "feature": {},
+            "formDesignerId": "",
+            "onlineTableId": "",
+            "onlineDataId": ""
+        }
+    ],
+    "lineList": [
+        {
+            "from": "xnmqnrnwjf",
+            "to": "dw09mb3b6"
+        },
+        {
+            "from": "dw09mb3b6",
+            "to": "2tuzgsc4"
+        },
+        {
+            "from": "2tuzgsc4",
+            "to": "sue9uw51f7",
+            "label": "test1"
+        },
+        {
+            "from": "2tuzgsc4",
+            "to": "ogi1a7uatg",
+            "label": "test2"
+        },
+        {
+            "from": "sue9uw51f7",
+            "to": "rw5ajv1059"
+        },
+        {
+            "from": "ogi1a7uatg",
+            "to": "rw5ajv1059"
+        },
+        {
+            "from": "rw5ajv1059",
+            "to": "ggbsjauss"
+        }
+    ]
+}

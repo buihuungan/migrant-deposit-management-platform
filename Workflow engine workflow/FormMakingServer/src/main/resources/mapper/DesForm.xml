@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="cn.zhenglili.fmaking.desform.dao.DesFormDao">
+    <resultMap type="cn.zhenglili.fmaking.desform.entity.DesForm" id="DesFormMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="content" column="content" jdbcType="OTHER"/>
+        <result property="encoding" column="encoding" jdbcType="VARCHAR"/>
+        <result property="icon" column="icon" jdbcType="VARCHAR"/>
+        <result property="userId" column="userId" jdbcType="VARCHAR"/>
+        <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
+        <result property="deleteFlag" column="deleteFlag" jdbcType="OTHER"/>
+        <result property="tenantId" column="tenant_id" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="selectOne" resultType="cn.zhenglili.fmaking.desform.entity.DesForm">
+        select *
+        from des_form
+        where id = #{id}
+    </select>
+    <select id="selectDesFormList" parameterType="cn.zhenglili.fmaking.desform.entity.DesFormQuery"
+            resultType="cn.zhenglili.fmaking.desform.entity.DesForm">
+        select id,name,encoding,icon,userId,createTime,updateTime,deleteFlag,tenant_id
+        from des_form
+        where userId = #{userId} and tenant_id = #{tenantId} and deleteFlag = 1
+        <if test="desFormQuery.name != null and desFormQuery.name != ''">
+            and `name` like concat ('%',#{desFormQuery.name},'%')
+        </if>
+        <if test="desFormQuery.encoding != null and desFormQuery.encoding != ''">
+            and encoding like concat ('%',#{desFormQuery.encoding},'%')
+        </if>
+        <if test="desFormQuery.deleteFlag != 2">
+            and deleteFlag = #{desFormQuery.deleteFlag}
+        </if>
+        order by updateTime desc
+        limit #{pageOff},#{pageSize}
+    </select>
+    <select id="selectAllDesFormList" parameterType="cn.zhenglili.fmaking.desform.entity.DesFormQuery"
+            resultType="cn.zhenglili.fmaking.desform.entity.DesForm">
+        select id,name,encoding,icon,userId,createTime,updateTime,deleteFlag,tenant_id
+        from des_form
+        where userId = #{userId} and tenant_id = #{tenantId} and deleteFlag = 1
+        <if test="desFormQuery.name != null and desFormQuery.name != ''">
+            and `name` like concat ('%',#{desFormQuery.name},'%')
+        </if>
+        <if test="desFormQuery.encoding != null and desFormQuery.encoding != ''">
+            and encoding like concat ('%',#{desFormQuery.encoding},'%')
+        </if>
+        <if test="desFormQuery.deleteFlag != 2">
+            and deleteFlag = #{desFormQuery.deleteFlag}
+        </if>
+        order by updateTime desc
+    </select>
+    <insert id="insertDesForm" parameterType="cn.zhenglili.fmaking.desform.entity.DesForm">
+        insert into des_form(id,`name`,encoding,icon,userId,createTime,updateTime,tenant_id)
+        values(#{id},#{name},#{encoding},#{icon},#{userId},#{createTime},#{updateTime},#{tenantId})
+    </insert>
+    <update id="updateDesForm" parameterType="cn.zhenglili.fmaking.desform.entity.DesForm">
+        update des_form
+        set `name`=#{name},encoding=#{encoding},icon=#{icon},updateTime=#{updateTime}
+        where id = #{id}
+    </update>
+    <update id="updateDesFormContent" parameterType="cn.zhenglili.fmaking.desform.entity.DesForm">
+        update des_form
+        set content = #{content},updateTime=#{updateTime}
+        where id = #{id}
+    </update>
+    <update id="updateDeleteFlag">
+        update des_form
+        set deleteFlag = #{deleteFlag}
+        where id = #{id}
+    </update>
+    <delete id="deleteById">
+        delete from des_form
+        where id= #{id}
+    </delete>
+    <delete id="deleteBatchIds">
+        delete from des_form
+        where id in
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="count" parameterType="string" resultType="integer">
+        select count(*)
+        from des_form
+        where userId = #{userId} and deleteFlag = 1
+    </select>
+</mapper>

@@ -1,0 +1,303 @@
+# ============================================================
+# 农民工工资保证金管理系统 - Git忽略配置
+# 防止敏感数据泄露，保护数据库、配置、文档等私密信息
+# ============================================================
+
+# ============================================================
+# 一、敏感数据文件（绝对禁止上传）
+# ============================================================
+
+# -------- SQL数据库脚本 --------
+# 包含完整的表结构、数据、存储过程等敏感信息
+**/*.sql
+**/sql/*
+**/db/*
+**/*dump*.sql
+**/*backup*.sql
+
+# -------- 代码生成器模板缓存 --------
+**/code-template-online/
+**/code-template/
+
+# -------- 配置文件（包含密码、密钥等） --------
+# application*.yml 和 application*.properties 可能包含数据库密码、API密钥
+# 但示例配置文件（*-example.yml）可以上传，用于引导用户配置
+**/application*.yml
+!**/application-example.yml
+!**/*-example.yml
+**/application*.yaml
+**/application*.properties
+
+# -------- 环境变量文件 --------
+# .env 文件通常包含敏感的配置信息
+**/.env
+**/.env.*
+**/.env.local
+**/.env.development
+**/.env.production
+**/.env.test
+
+# -------- 敏感配置文件 --------
+**/config/*.properties
+**/deploy/config/*
+**/deploy/config/*.properties
+**/deploy/config/*.yml
+**/deploy/config/*.yaml
+
+# -------- 数据库配置文件 --------
+jeecg_database.properties
+jeecg_config.properties
+**/jeecg_database.properties
+**/jeecg_config.properties
+
+# -------- 敏感配置模板 --------
+**/bootstrap.yml
+**/bootstrap.properties
+**/bootstrap-dev.yml
+**/bootstrap-prod.yml
+
+# -------- Nacos配置 --------
+**/nacos/**
+**/*-nacos*.yml
+
+# ============================================================
+# 二、个人文档和学习笔记（禁止上传）
+# ============================================================
+
+# -------- docs文件夹 --------
+# 包含自己写的帮助理解文档、面试场景实录等
+docs/
+
+# -------- 个人笔记 --------
+*.md
+!README.md
+!CHANGELOG.md
+LICENSE
+CONTRIBUTING.md
+
+# -------- 学习笔记 --------
+**/notes/**
+**/笔记/**
+**/doc/**
+**/文档/**
+
+# ============================================================
+# 三、构建产物和编译文件
+# ============================================================
+
+# -------- Maven构建产物 --------
+**/target/
+**/target/**/generated-sources/**
+**/target/**/generated-test-sources/**
+**/target/**/test-classes/
+**/target/**/classes/
+
+# -------- Java编译产物 --------
+**/*.class
+**/*.jar
+**/*.war
+**/*.ear
+**/*.zip
+**/*.tar.gz
+**/*.rar
+
+# -------- Front-end构建产物 --------
+**/node_modules/
+**/dist/
+**/build/
+**/.nuxt/
+**/.next/
+
+# -------- npm缓存 --------
+.npm
+.npmrc
+.yarn/
+.yarnrc
+
+# -------- pnpm缓存 --------
+.pnpm-store/
+.pnpm/
+
+# -------- Gradle构建产物 --------
+**/build/
+**/.gradle/
+
+# -------- IDE构建产物 --------
+.idea/
+*.iml
+!.idea/codeStyles/
+!.idea/icon.png
+
+# ============================================================
+# 四、IDE和编辑器配置
+# ============================================================
+
+# -------- VS Code --------
+.vscode/
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
+
+# -------- Eclipse --------
+.settings/
+.project
+.classpath
+.factorypath
+
+# -------- JetBrains (IntelliJ IDEA, WebStorm等) --------
+.idea/
+*.iws
+*.ipr
+*.iml
+.idea_modules/
+
+# -------- NetBeans --------
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# -------- Vim --------
+*.swp
+*.swo
+*~
+.DS_Store
+
+# -------- Emacs --------
+*~
+\#*\#
+.\#*
+
+# -------- Sublime --------
+*.sublime-*
+
+# ============================================================
+# 五、日志文件
+# ============================================================
+
+# -------- 日志文件 --------
+**/*.log
+**/logs/
+**/log/
+*.log.*
+
+# -------- 日志目录 --------
+logs/
+log/
+**/logs/
+**/log/
+
+# ============================================================
+# 六、操作系统文件
+# ============================================================
+
+# -------- Windows --------
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+# -------- macOS --------
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# -------- Linux --------
+.fuse_hidden*
+.Trash-*
+.nfs*
+
+# -------- 临时文件 --------
+*.tmp
+*.temp
+*.bak
+*.backup
+*~
+*.swp
+*.swo
+
+# ============================================================
+# 七、安全相关文件
+# ============================================================
+
+# -------- 证书和密钥 --------
+**/*.pem
+**/*.key
+**/*.crt
+**/*.cer
+**/*.keystore
+**/*.truststore
+**/*.jks
+**/cert/
+**/certs/
+**/ssl/
+**/keystore/
+**/.well-known/
+
+# -------- 密钥文件 --------
+id_rsa*
+id_dsa*
+*.ppk
+
+# -------- 凭证文件 --------
+**/credentials.json
+**/secrets.json
+**/secrets.yaml
+**/.netrc
+
+# ============================================================
+# 八、本地开发文件
+# ============================================================
+
+# -------- 本地覆盖配置 --------
+**/local/
+**/local/**
+**/*-local.*
+**/*_local.*
+**/override/
+
+# -------- 调试文件 --------
+**/debug/
+**/debug.log
+**/*.debug
+**/*.dump
+
+# ============================================================
+# 九、外部依赖（不需要上传）
+# ============================================================
+
+# -------- Maven本地仓库标记 --------
+.m2/
+
+# -------- 前端依赖标记 --------
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+bun.lockb
+
+# ============================================================
+# 十、其他
+# ============================================================
+
+# -------- 空目录 --------
+**/empty
+**/EMPTY
+**/placeholder
+**/.gitkeep
+
+# -------- 测试输出 --------
+**/test-output/
+**/test-reports/
+**/surefire-reports/
+**/coverage/
+
+# -------- CI/CD本地文件 --------
+.azure/
+.aws/
+.github/

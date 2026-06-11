@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class  = "ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread]  %logger{0} - %msg%n
+            </pattern>
+            <charset>utf-8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+        </filter>
+    </appender>
+    <!-- file print information -->
+    <appender name="FILE-ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class = "ch.qos.logback.core.rolling.TimeBasedRollingPolicy" >
+            <FileNamePattern>
+                /home/waterlufei/eurekaserver/log/Error/error%d{yyyyMMdd}.log
+                <!--/usr/local/xyz/TaskManagement/log/TaskManagementServerLog%d{yyyy-MM-dd}/ERROR_%d{yyyy-MM-dd}.log-->
+            </FileNamePattern>
+        </rollingPolicy>
+        <encoder class  = "ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{0} - %msg%n
+            </pattern>
+            <charset>utf-8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+    <appender name="FILE-WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class = "ch.qos.logback.core.rolling.TimeBasedRollingPolicy" >
+            <FileNamePattern>
+                /home/waterlufei/eurekaserver/log/Warn/warn%d{yyyyMMdd}.log
+                <!--/usr/local/xyz/TaskManagement/log/TaskManagementServerLog%d{yyyy-MM-dd}/WARN_%d{yyyy-MM-dd}.log-->
+            </FileNamePattern>
+        </rollingPolicy>
+        <encoder class  = "ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{0} - %msg%n
+            </pattern>
+            <charset>utf-8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+    <appender name="FILE-INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class = "ch.qos.logback.core.rolling.TimeBasedRollingPolicy" >
+            <FileNamePattern>
+                /home/waterlufei/eurekaserver/log/Info/info%d{yyyyMMdd}.log
+                <!--/usr/local/xyz/TaskManagement/log/TaskManagementServerLog%d{yyyy-MM-dd}/INFO_%d{yyyy-MM-dd}.log-->
+            </FileNamePattern>
+        </rollingPolicy>
+        <encoder class  = "ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{0} - %msg%n
+            </pattern>
+            <charset>utf-8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE-ERROR"/>
+        <appender-ref ref="FILE-WARN"/>
+        <appender-ref ref="FILE-INFO"/>
+    </root>
+</configuration>

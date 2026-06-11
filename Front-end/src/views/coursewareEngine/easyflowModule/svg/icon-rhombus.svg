@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>菱形-icon-灰</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.7">
+        <g id="桌面端-HD备份-23" transform="translate(-36.000000, -518.000000)" fill-rule="nonzero">
+            <g id="流程节点备份-2" transform="translate(24.000000, 463.999999)">
+                <g id="编组-9" transform="translate(0.000000, 44.000000)">
+                    <g id="菱形-icon-灰" transform="translate(12.000000, 10.000000)">
+                        <g id="架构图" transform="translate(0.000000, 0.000000)">
+                            <g id="编组-3" transform="translate(0.000000, 0.000000)">
+                                <rect id="矩形" fill="#000000" opacity="0" x="0" y="0" width="16" height="16"></rect>
+                                <path d="M11.7289378,3.50816799 C12.2812226,3.50816799 12.7289378,3.95588324 12.7289378,4.50816799 L12.7289378,11.491832 C12.7289378,12.0441168 12.2812226,12.491832 11.7289378,12.491832 L4.74527382,12.491832 C4.19298907,12.491832 3.74527382,12.0441168 3.74527382,11.491832 L3.74527382,4.50816799 C3.74527382,3.95588324 4.19298907,3.50816799 4.74527382,3.50816799 L11.7289378,3.50816799 Z M11.7289378,4.50816799 L4.74527382,4.50816799 L4.74527382,11.491832 L11.7289378,11.491832 L11.7289378,4.50816799 Z" id="矩形" fill="#333333" transform="translate(8.237106, 8.000000) rotate(-315.000000) translate(-8.237106, -8.000000) "></path>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

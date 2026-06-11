@@ -1,0 +1,6 @@
+.table-bordered>thead>tr>td, .table-bordered>thead>tr>th{
+    width: 200px;
+}
+#formName{
+    margin-left: 5px;
+}

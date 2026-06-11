@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>创建场景</title>
+    <script src="../laoziyun/app.js"></script>
+</head>
+<body style="padding: 0; margin: 0;">
+    <div id="container" style="width: 100%;height: 100vh;" />
+</body>
+</html>
+<script>
+    //鉴权参数
+    const param = {
+        appkey: 'ZcbnAhusrXot',  
+        appsecret: 'WV6ka7OpwLiA9uX1Q8oR5EtjGxcUzYIC'
+    }
+    //创建一个场景
+    const viewer = new AMRT.Viewer( 'container', /*容器dom或者dom对应的id*/ param )
+
+    //通过老子云平台 ID 加载一个模型
+    viewer.loadModel('1440920777452032000')
+</script>

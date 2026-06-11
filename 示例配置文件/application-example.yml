@@ -1,0 +1,107 @@
+# ============================================================
+# 示例配置文件 - 复制此文件为 application.yml 并填写实际值
+# ============================================================
+# 这是配置模板文件，包含所有需要配置的参数
+# 请复制此文件为 application.yml 并填写实际值
+# ============================================================
+
+server:
+  port: 8081  # 服务端口
+
+spring:
+  application:
+    name: migrant-deposit-platform
+
+  # 数据库配置 - 请填写您的MySQL信息
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/jeecgstj?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: YOUR_DB_USERNAME      # TODO: 替换为您的数据库用户名
+    password: YOUR_DB_PASSWORD       # TODO: 替换为您的数据库密码
+
+  # Redis配置 - 请填写您的Redis信息
+  redis:
+    host: localhost
+    port: 6379
+    password: YOUR_REDIS_PASSWORD   # TODO: 替换为您的Redis密码（如果没有密码请删除此行）
+    database: 0
+    timeout: 3000ms
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 8
+        min-idle: 0
+
+  # Nacos配置 - 请填写您的Nacos信息
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848   # TODO: Nacos服务地址
+        namespace: public             # Nacos命名空间
+      config:
+        server-addr: localhost:8848    # TODO: Nacos服务地址
+        file-extension: yaml
+        shared-dataids: common.yaml
+        refreshable-dataids: common.yaml
+
+# ============================================================
+# JWT配置 - 请修改默认密钥
+# ============================================================
+jwt:
+  secret: YOUR_JWT_SECRET_KEY_HERE    # TODO: 请替换为您的JWT密钥（至少32位）
+  expiration: 86400000                 # Token有效期（毫秒），默认24小时
+
+# ============================================================
+# 差异化存缴配置 - 政策参数
+# ============================================================
+differential:
+  # A级信用企业 - 减免50%
+  a-level:
+    rate: 0.5
+    description: 连续3年无拖欠记录
+  # B级信用企业 - 标准存缴
+  b-level:
+    rate: 1.0
+    description: 正常存缴
+  # C级信用企业 - 上浮50%
+  c-level:
+    rate: 1.5
+    description: 有拖欠记录或新企业
+
+# ============================================================
+# uflo工作流配置
+# ============================================================
+uflo:
+  database:
+    type: mysql                         # 数据库类型
+  history:
+    enabled: true                        # 记录历史
+
+# ============================================================
+# 文件上传配置
+# ============================================================
+file:
+  upload:
+    path: ./uploads                     # 上传文件存储路径
+    max-size: 10485760                  # 最大文件大小（10MB）
+    allowed-extensions: pdf,doc,docx,xls,xlsx,jpg,png
+
+# ============================================================
+# 邮件配置（可选）
+# ============================================================
+# mail:
+#   host: smtp.example.com
+#   port: 587
+#   username: YOUR_EMAIL
+#   password: YOUR_EMAIL_PASSWORD
+#   from: noreply@example.com
+
+# ============================================================
+# 短信配置（可选）
+# ============================================================
+# sms:
+#   access-key: YOUR_AK
+#   secret-key: YOUR_SK
+#   sign-name: 人社局
+#   template-code: SMS_xxxxxx

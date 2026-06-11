@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>three.js webgl - OBJLoader + MTLLoader</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <link type="text/css" rel="stylesheet" href="./css/main.css" />
+    <!-- import Vue before Element -->
+    <script src="./js/vue.js"></script>
+    <!-- import JavaScript -->
+    <script src="./js/element-ui.js"></script>
+    <link rel="stylesheet" href="./css/elementui.css" />
+  </head>
+
+  <body>
+    <div id="info">
+      <el-container>
+        <el-aside
+          width="300px"
+          
+          style="z-index: 20;pointer-events: auto;max-height:500px;
+      "
+        >
+          <el-tree
+            :data="OBJdata"
+            ref="tree"
+            default-expand-all
+            node-key="id"
+            :highlight-current="true"
+            :expand-on-click-node="false"
+          >
+            <span class="custom-tree-node" slot-scope="{ node, data }">
+              <span v-if="node.childNodes.length == 0">
+                <el-checkbox v-model="node.data.visible" @click="click(node)"></el-checkbox>
+              </span>
+              <span>{{ node.label }}</span>
+            </span>
+          </el-tree>
+        </el-aside>
+        <el-main>
+          正在加载模型
+          <div id="main"></div>
+        </el-main>
+      </el-container>
+    </div>
+  </body>
+  <script type="module">
+    import * as THREE from '../build/three.module.js'
+    import { OrbitControls } from './jsm/controls/OrbitControls.js'
+    import { DDSLoader } from './jsm/loaders/DDSLoader.js'
+    import { MTLLoader } from './jsm/loaders/MTLLoader.js'
+    import { OBJLoader } from './jsm/loaders/OBJLoader.js'
+    import { DragControls } from './jsm/controls/DragControls.js'
+    import { TrackballControls } from './jsm/controls/TrackballControls.js'
+    new Vue({
+      el: '#info',
+      data() {
+        return {
+          OBJdata: []
+        }
+      },
+      methods: {
+        click(node) {
+          console.log(node)
+          node.data.visible = !node.data.visible
+          console.log(this.OBJdata)
+        },
+        Load3D(name3d) {
+          let camera, scene, renderer, controls, objdata
+          var _this = this
+          let mouseX = 0,
+            mouseY = 0
+          let enableSelection = false
+          let windowHalfX = window.innerWidth / 2
+          let windowHalfY = window.innerHeight / 2
+          const mouse = new THREE.Vector2(),
+            raycaster = new THREE.Raycaster()
+          const objects = []
+          init()
+          animate()
+
+          function init() {
+            const container = document.getElementById('main')
+            document.body.appendChild(container)
+
+            camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 2000)
+            camera.position.z = 100
+
+            // scene
+
+            scene = new THREE.Scene()
+
+            const ambientLight = new THREE.AmbientLight(0xcccccc, 0.4)
+            scene.add(ambientLight)
+
+            const pointLight = new THREE.PointLight(0xffffff, 0.8)
+            camera.add(pointLight)
+            scene.add(camera)
+
+            // model
+
+            const onProgress = function(xhr) {
+              if (xhr.lengthComputable) {
+                const percentComplete = (xhr.loaded / xhr.total) * 100
+                console.log(Math.round(percentComplete, 2) + '% downloaded')
+              }
+            }
+
+            const onError = function() {}
+
+            const manager = new THREE.LoadingManager()
+            manager.addHandler(/\.dds$/i, new DDSLoader())
+
+            // comment in the following line and import TGALoader if your asset uses TGA textures
+            // manager.addHandler( /\.tga$/i, new TGALoader() );
+
+            new MTLLoader(manager).setPath('./model/file/').load(name3d + '.mtl', function(materials) {
+              materials.preload()
+
+              new OBJLoader(manager)
+                .setMaterials(materials)
+                .setPath('./model/file/')
+                .load(
+                  name3d + '.obj',
+                  function(object) {
+                    object.position.y = 0
+                    console.log(object)
+                    objdata = {
+                      id: object.uuid,
+                      label: name3d,
+                      children: []
+                    }
+                    let identity = 'O30050150208A'
+                    let num = 0
+                    object.children.map(item => {
+                      let objitem = {
+                        id: item.uuid,
+                        label: item.name + '       ' +identity + num,
+                        visible: item.visible
+                      }
+                      objdata.children.push(objitem)
+                      objects.push(item)
+                      num ++
+                    })
+                    console.log(objdata)
+                    _this.OBJdata.push(objdata)
+                    scene.add(object)
+                  },
+                  onProgress,
+                  onError
+                )
+            })
+
+            new MTLLoader(manager).setPath('./model/file/').load(name3d + '.mtl', function(materials) {
+              materials.preload()
+
+              new OBJLoader(manager)
+                .setMaterials(materials)
+                .setPath('./model/file/')
+                .load(
+                  name3d + '.obj',
+                  function(object) {
+                    object.position.x = 40
+                    object.position.z = -40
+                    scene.add(object)
+                  },
+                  onProgress,
+                  onError
+                )
+            })
+            //
+            renderer = new THREE.WebGLRenderer()
+            renderer.setPixelRatio(window.devicePixelRatio)
+            renderer.setSize(window.innerWidth, window.innerHeight)
+            renderer.setClearColor(0xffffff)
+            container.appendChild(renderer.domElement)
+            controls = new OrbitControls(camera, renderer.domElement)
+            // controls = new TrackballControls( camera, renderer.domElement );
+
+            // controls.rotateSpeed = 1.0;
+            // controls.zoomSpeed = 1.2;
+            // controls.panSpeed = 0.8;
+            // controls.noZoom = false;
+            // controls.noPan = false;
+            // controls.staticMoving = true;
+            // controls.dynamicDampingFactor = 0.3;
+
+            var dragControls = new DragControls(objects, camera, renderer.domElement)
+            // 开始拖拽
+            dragControls.addEventListener('dragstart', function(event) {
+              controls.enabled = false
+            })
+            // 拖拽结束
+            dragControls.addEventListener('dragend', function(event) {
+              controls.enabled = true
+            })
+            document.addEventListener('mousemove', onDocumentMouseMove)
+            document.addEventListener('click', onClick)
+            window.addEventListener('keydown', onKeyDown)
+            window.addEventListener('keyup', onKeyUp)
+            //
+
+            window.addEventListener('resize', onWindowResize)
+          }
+          //
+          function onWindowResize() {
+            windowHalfX = window.innerWidth / 2
+            windowHalfY = window.innerHeight / 2
+
+            camera.aspect = window.innerWidth / window.innerHeight
+            camera.updateProjectionMatrix()
+
+            renderer.setSize(window.innerWidth, window.innerHeight)
+          }
+
+          function onDocumentMouseMove(event) {
+            mouseX = (event.clientX - windowHalfX) / 2
+            mouseY = (event.clientY - windowHalfY) / 2
+          }
+          function onKeyDown(event) {
+            enableSelection = event.keyCode === 16 ? true : false
+          }
+
+          function onKeyUp() {
+            enableSelection = false
+          }
+          function onClick(event) {
+            event.preventDefault()
+
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1
+            raycaster.setFromCamera(mouse, camera)
+            const intersections = raycaster.intersectObjects(objects, true)
+            console.log(intersections)
+            console.log(objects)
+
+            if (intersections.length > 0) {
+              let object = intersections[0].object
+              console.log(object)
+
+              _this.$refs.tree.setCurrentKey(object.uuid)
+              console.log(_this.$refs.tree)
+              console.log(_this.$refs.tree.getCheckedNodes())
+            }
+
+            render()
+          }
+          //
+
+          function animate() {
+            requestAnimationFrame(animate)
+            render()
+            show()
+          }
+
+          function render() {
+            // camera.position.x += ( mouseX - camera.position.x ) * .05;
+            // camera.position.y += ( - mouseY - camera.position.y ) * .05;
+            controls.update()
+            camera.lookAt(scene.position)
+
+            renderer.render(scene, camera)
+          }
+          function show() {
+            try {
+              let children = _this.OBJdata[0].children
+              let i = 0
+              for (i; i < children.length; i++) {
+                if (children[i].visible != objects[i].visible) {
+                  objects[i].visible = children[i].visible
+                }
+              }
+            } catch (err) {}
+          }
+        }
+      },
+      created() {
+        this.Load3D('baimiyuan')
+      }
+    })
+  </script>
+</html>

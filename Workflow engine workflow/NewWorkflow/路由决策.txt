@@ -1,0 +1,84 @@
+{
+    "name": "流程",
+    "start_process_url": "",
+    "category_id": "",
+    "effect_date": "",
+    "description": "",
+    "type": "process",
+    "nodeList": [
+        {
+            "id": "4vlyz3afip",
+            "type": "decision",
+            "name": "路由决策",
+            "left": "361px",
+            "top": "171px",
+            "state": "waiting",
+            "feature": {},
+            "formDesignerId": "",
+            "onlineTableId": "",
+            "onlineDataId": ""，
+           "event_handler_bean": "",//事件bean
+           "if_expression":"",  //条件表达式
+        },
+        {
+            "id": "cyyewtf34",
+            "type": "task",
+            "name": "人工节点",
+            "left": "574px",
+            "top": "243px",
+            "state": "waiting",
+            "feature": {},
+            "formDesignerId": "",
+            "onlineTableId": "",
+            "onlineDataId": "",
+            "task_type": "Normal",
+            "event_handler_bean": "",
+            "assignment_type": "",
+            "assignee": [],
+            "due": {
+                "day": "",
+                "hour": "",
+                "minute": ""
+            },
+            "user_data": {
+                "key": "",
+                "value": ""
+            }
+        },
+        {
+            "id": "1k8n6hc1yr",
+            "type": "task",
+            "name": "人工节点1",
+            "left": "566px",
+            "top": "77px",
+            "state": "waiting",
+            "feature": {},
+            "formDesignerId": "",
+            "onlineTableId": "",
+            "onlineDataId": "",
+            "task_type": "Normal",
+            "event_handler_bean": "",
+            "assignment_type": "",
+            "assignee": [],
+            "due": {
+                "day": "",
+                "hour": "",
+                "minute": ""
+            },
+            "user_data": {
+                "key": "",
+                "value": ""
+            }
+        }
+    ],
+    "lineList": [
+        {
+            "from": "4vlyz3afip",
+            "to": "cyyewtf34"
+        },
+        {
+            "from": "4vlyz3afip",
+            "to": "1k8n6hc1yr"
+        }
+    ]
+}
