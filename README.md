@@ -181,8 +181,7 @@ Copyright (c) 2024-present
 
 ## 🙋‍♂️ 关于作者
 
-**SirLS** — 后端开发工程师 / Java 全栈
-
+- GitHub: [@buihuungan](https://github.com/buihuungan)
 - 🛠️ 技术方向：Spring Cloud 微服务、政务类系统、工作流引擎、企业级中后台
 - 💼 本项目用于展示**独立完成微服务架构设计 + 全栈开发**的能力
 - 📫 联系方式：详见个人 GitHub Profile
